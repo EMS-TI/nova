@@ -26,7 +26,7 @@ export function Register() {
     }
 
     localStorage.setItem(username, password);
-    navigate('/login');
+    navigate('/main');
   };
 
   return (
