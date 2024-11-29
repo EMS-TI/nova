@@ -26,9 +26,8 @@ export function Register() {
     }
 
     localStorage.setItem(username, password);
-    navigate('/main');
+    navigate('/register');
   };
-
   return (
     <Layout>
       <div className="max-w-md mx-auto">
