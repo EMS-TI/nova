@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMS-TI CURSOS</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #0e0e0e;
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
+        }
+
+        #video-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        video {
+            width: 250px;
+            height: auto;
+            cursor: pointer;
+        }
+
+        #courses-content {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            transition: opacity 0.5s ease;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.5;
+        }
+
+        .course-area {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+            transition: transform 0.3s;
+        }
+
+        .course-area:hover {
+            transform: scale(1.05);
+        }
+
+        #unmute-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            margin-top: 20px;
+        }
+
+        #unmute-button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        #unmute-button:active {
+            transform: scale(0.95);
+        }
+
+        .nav-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #28a745;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            margin: 5px;
+        }
+
+        .nav-button:hover {
+            background-color: #218838;
+            transform: scale(1.05);
+        }
+
+        .nav-button:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+    <div id="video-container" style="display: none;">
+        <video id="video" autoplay muted>
+            <source src="videoems.mp4" type="video/mp4">
+            Seu navegador não suporta o elemento de vídeo.
+        </video>
+    </div>
+
+    <div id="courses-content">
+        <h2>Cursos Disponíveis em Breve!</h2>
+        <p>Fique atento! Em breve teremos cursos acessíveis de:</p>
+        
+        <div class="course-area">
+            <h3>Educação Financeira</h3>
+            <p>Aprenda a gerenciar suas finanças pessoais e investimentos.</p>
+        </div>
+        
+        <div class="course-area">
+            <h3>Trader</h3>
+            <p>Descubra estratégias para operar no mercado financeiro.</p>
+        </div>
+        
+        <div class="course-area">
+            <h3>Mercado de Ações</h3>
+            <p>Entenda como funciona a bolsa de valores e como investir.</p>
+        </div>
+
+        <button class="nav-button" onclick="window.location.href='cadastro.html'">Cadastrar-se</button>
+        <button class="nav-button" onclick="window.location.href='login.html'">Login</button>
+    </div>
+
+    <button id="unmute-button">Ativar Som</button>
+
+    <script>
+        const video = document.getElementById('video');
+        const videoContainer = document.getElementById('video-container');
+        const coursesContent = document.getElementById('courses-content');
+        const unmuteButton = document.getElementById('unmute-button');
+
+        // Verifica se a página está sendo aberta pelo Instagram
+        const isInstagram = navigator.userAgent.includes('Instagram');
+
+        if (isInstagram) {
+            // Se for aberto pelo Instagram, mostra o conteúdo dos cursos
+            videoContainer.style.display = 'none';
+            coursesContent.style.display = 'block';
+        } else {
+            // Se não for pelo Instagram, exibe o vídeo
+            videoContainer.style.display = 'flex';
+            video.play(); // Inicia a reprodução do vídeo
+
+            // Adiciona um evento de click no vídeo para redirecionar ao link
+            video.addEventListener('click', () => {
+                window.open('https://www.instagram.com/emstishopping/', '_blank');
+            });
+        }
+
+        // Evento que ocorre quando o vídeo termina
+        video.addEventListener('ended', () => {
+            video.style.display = 'none'; // Oculta o vídeo
+            coursesContent.style.display = 'block'; // Exibe o conteúdo dos cursos
+            coursesContent.style.opacity = '1'; // Define a opacidade do conteúdo
+            unmuteButton.style.display = 'none'; // Esconde o botão após o vídeo
+        });
+
+        // Adiciona o evento de clique para ativar/desativar o som
+        unmuteButton.addEventListener('click', () => {
+            if (video.muted) {
+                video.muted = false; // Ativa o som
+                unmuteButton.textContent = 'Desativar Som'; // Muda o texto do botão
+            } else {
+                video.muted = true; // Desativa o som
+                unmuteButton.textContent = 'Ativar Som'; // Muda o texto do botão
+            }
+        });
+    </script>
+</body>
+</html>
