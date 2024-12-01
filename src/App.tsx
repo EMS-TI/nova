@@ -3,8 +3,6 @@ import { Home } from './pages/Home';
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
 import { Deposits } from './pages/Deposits';
-import './assets/index.css';
-
 
 function App() {
   return (
@@ -14,7 +12,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/deposits" element={<Deposits />} />
-        <Route path="*" element={<Navigate to="index.html /" replace />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
   );
