@@ -1,9 +1,12 @@
 import { defineConfig } from 'vite';
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  base: './', // Define caminhos relativos
+  base: './', // Garante que os caminhos sejam tratados de forma relativa
   build: {
-    outDir: 'dist', // Certifique-se de que a saída está correta
+    outDir: 'dist', // Diretório de saída para o build
+    assetsDir: 'assets', // Diretório para arquivos estáticos
+    rollupOptions: {
+      input: 'index.html', // Certifique-se de que o Vite sabe onde está o ponto de entrada
+    },
   },
 });
