@@ -1,12 +1,12 @@
 {
   "compilerOptions": {
-    "outDir": "./dist",
-    "rootDir": "./src",
+    "jsx": "react-jsx", // ou "react" se estiver usando React sem a nova sintaxe
     "module": "ESNext",
     "target": "ESNext",
-    "moduleResolution": "Node",
-    "esModuleInterop": true,
+    "moduleResolution": "node",
     "strict": true,
-    "skipLibCheck": true
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
   }
 }
