@@ -3,6 +3,8 @@ import { Home } from './pages/Home';
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
 import { Deposits } from './pages/Deposits';
+import './assets/index.css';
+
 
 function App() {
   return (
