@@ -125,7 +125,7 @@ export function Deposits() {
                 aspect-square rounded-lg font-medium transition-colors
                 ${
                   deposit.marked
-                    ? 'bg-blue-500 hover:bg-blue-600'
+                    ? 'bg-red-500 hover:bg-red-600'
                     : 'bg-gray-700 hover:bg-gray-600'
                 }
               `}
