@@ -28,6 +28,7 @@ export function Deposits() {
         amount: i + 1,
         date: '',
         marked: false,
+        withdrawn: false,
       }));
       setDeposits(initialDeposits);
     } else {
@@ -59,11 +60,13 @@ export function Deposits() {
     localStorage.setItem(`${username}_deposits`, JSON.stringify(newDeposits));
   };
 
+
   const handleReset = () => {
     const newDeposits = deposits.map((d) => ({
       ...d,
       marked: false,
       date: '',
+      withdrawn: false, // Reseta a retirada
     }));
     setDeposits(newDeposits);
     localStorage.setItem(`${username}_deposits`, JSON.stringify(newDeposits));
@@ -72,7 +75,8 @@ export function Deposits() {
   const handleLogout = () => {
     localStorage.removeItem('isLoggedIn');
     localStorage.removeItem('currentUser');
-    navigate('/login');
+    localStorage.removeItem(`${username}_password`);
+    navigate('/index');
   };
 
   const progress = (totalDeposited / TOTAL_AMOUNT) * 100;
@@ -123,11 +127,7 @@ export function Deposits() {
               onClick={() => handleDeposit(deposit)}
               className={`
                 aspect-square rounded-lg font-medium transition-colors
-                ${
-                  deposit.marked
-                    ? 'bg-blue-500 hover:bg-red-600'
-                    : 'bg-gray-600'
-                }
+                ${deposit.withdrawn ? 'bg-red-500' : deposit.marked ? 'bg-blue-500 hover:bg-red-600' : 'bg-gray-600'}
               `}
               title={deposit.date ? new Date(deposit.date).toLocaleDateString() : ''}
             >

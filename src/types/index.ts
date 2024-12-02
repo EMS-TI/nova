@@ -4,6 +4,10 @@ export interface User {
 }
 
 export interface Deposit {
+  withdrawn: any;
+  withdrawn: any;
+  withdrawn: any;
+  withdrawn: any;
   id: number;
   amount: number;
   date: string;
