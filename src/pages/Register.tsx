@@ -7,46 +7,76 @@ import { Eye, EyeOff } from 'lucide-react';
 
 export function Register() {
   const [showPassword, setShowPassword] = useState(false);
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    password: '',
+    fullName: '',
+  });
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleRegister = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!username || !password) {
+    const { username, email, password, fullName } = formData;
+
+    if (!username || !email || !password || !fullName) {
       setError('Preencha todos os campos');
       return;
     }
 
-    if (localStorage.getItem(username)) {
+    // Validação de email simples
+    if (!email.includes('@')) {
+      setError('Digite um email válido');
+      return;
+    }
+
+    // Simulação de armazenamento
+    const users = JSON.parse(localStorage.getItem('users') || '[]');
+
+    if (users.some((user: any) => user.username === username)) {
       setError('Usuário já existe');
       return;
     }
 
-    localStorage.setItem(username, password);
+    users.push({ username, email, password, fullName });
+    localStorage.setItem('users', JSON.stringify(users));
     navigate('/login');
   };
+
   return (
     <Layout>
       <div className="max-w-md mx-auto">
         <form onSubmit={handleRegister} className="bg-gray-800 p-8 rounded-lg space-y-6">
           <h1 className="text-2xl font-bold text-center">Cadastro</h1>
-          
+
+          <Input
+            label="Nome Completo"
+            value={formData.fullName}
+            onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+            error={error}
+          />
+
+          <Input
+            label="Email"
+            type="email"
+            value={formData.email}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+          />
+
           <Input
             label="Usuário"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            error={error}
+            value={formData.username}
+            onChange={(e) => setFormData({ ...formData, username: e.target.value })}
           />
 
           <div className="relative">
             <Input
               label="Senha"
               type={showPassword ? 'text' : 'password'}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={formData.password}
+              onChange={(e) => setFormData({ ...formData, password: e.target.value })}
             />
             <button
               type="button"
